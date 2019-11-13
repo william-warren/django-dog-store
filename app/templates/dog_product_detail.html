@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="card">
-    <h1>{{ dog_product.name }}</h1>
-    <dl>
-        <dt>Product Type</dt>
-        <dd>{{ dog_product.product_type }}</dd>
-        <dt>Dog Size</dt>
-        <dd>{{ dog_product.dog_size }}</dd>
-        <dt>Price</dt>
-        <dd>${{ dog_product.price|floatformat:"2" }}</dd>
-        <dt>Quantity</dt>
-        <dd>{{ dog_product.quantity }}</dd>
-    </dl>
-    <form action="{% url 'purchase_dog_product' dog_product.id %}" method="post">
-        {% csrf_token %}
-        <button class="btn btn-primary">Buy {{ dog_product.name }}</button>
-    </form>
+    <div class="card-body">
+        <h1 class="card-title">{{ dog_product.name }}</h1>
+        <dl>
+            <dt>Product Type</dt>
+            <dd>{{ dog_product.product_type }}</dd>
+            <dt>Dog Size</dt>
+            <dd>{{ dog_product.dog_size }}</dd>
+            <dt>Price</dt>
+            <dd>${{ dog_product.price|floatformat:"2" }}</dd>
+            <dt>Quantity</dt>
+            <dd>{{ dog_product.quantity }}</dd>
+        </dl>
+        <form action="{% url 'purchase_dog_product' dog_product.id %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-primary">Buy {{ dog_product.name }}</button>
+        </form>
+    </div>
 </div>
 {% endblock content %}

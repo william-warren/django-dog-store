@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title">Purchase #{{ purchase.id }}</h1>
+        <dl>
+            <dt>Product</dt>
+            <dd>{{ purchase.dog_product.name }}</dd>
+            <dt>Price</dt>
+            <dd>${{ purchase.dog_product.price|floatformat:"2" }}</dd>
+            <dt>Purchased At</dt>
+            <dd>{{ purchase.purchased_at }}</dd>
+        </dl>
+        <a href="{% url 'home' %}" class="card-link">Continue Shopping</a>
+    </div>
+</div>
+{% endblock content %}

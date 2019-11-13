@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="{% url 'new_dog_tag' %}" method="post" class="col-3">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="owner_name">Owner Name</label>
+        <input type="text" class="form-control" name="owner_name" id="owner_name" required>
+    </div>
+    <div class="form-group">
+        <label for="dog_name">Dog Name</label>
+        <input type="text" class="form-control" name="dog_name" id="dog_name" required>
+    </div>
+    <div class="form-group">
+        <label for="dog_birthday">Dog Birthday</label>
+        <input type="date" class="form-control" name="dog_birthday" id="dog_birthday" required>
+    </div>
+    <button class="btn btn-primary">Create Dog Tag</button>
+</form>
+{% endblock content %}

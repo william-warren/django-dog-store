@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Dog Tags</h1>
+<ul class="dog-tags">
+{% for dog_tag in dog_tags %}
+<li class="dog-tag mt-5">
+    <div class="dog-tag__dog_name">{{ dog_tag.dog_name }} ({{ dog_tag.dog_birthday}})</div>
+    <div class="dog-tag__owner_name">is loved by {{ dog_tag.owner_name }}</div>
+</li>
+{% endfor %}
+</ul>
+{% endblock content %}

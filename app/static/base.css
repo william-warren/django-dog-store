@@ -1,0 +1,31 @@
+.dog-tags {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3rem;
+}
+
+.dog-tag {
+    font-family: cursive;
+    background-color: goldenrod;
+    padding: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    border: 3px outset rgba(180,180,180,.5);
+}
+
+.dog-products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2rem;
+}
+
+.dog-product {
+    display: flex;
+    flex-direction: column;
+}
+
+.dog-product__price {
+    flex: 1;
+    margin-bottom: 2rem;
+}

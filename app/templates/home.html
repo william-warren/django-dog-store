@@ -2,13 +2,14 @@
 {% block content %}
 <h1>Dog Store</h1>
 <h2>Products</h2>
-<ul>
+<ul class="dog-products">
 {% for product in dog_products %}
 <li class="card">
-    <div class="card-body">
-        <h3 class="card-title">{{ product.name }}</h3>
-        <p>${{ product.price|floatformat:"2" }}</p>
-        <a href="{% url 'dog_product_detail' product.id %}" class="btn btn-primary">
+    <div class="card-body dog-product">
+        <h3 class="card-title dog-product__name">{{ product.name }}</h3>
+        <p class="dog-product__price">${{ product.price|floatformat:"2" }}</p>
+        <a href="{% url 'dog_product_detail' product.id %}"
+           class="btn btn-primary dog-product__link">
             View {{ product.name }}
         </a>
     </div>
