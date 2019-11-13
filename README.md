@@ -66,7 +66,7 @@ It has the following fields:
 The application has 6 paths:
 
 - `""` should route to a `home` view
-- `"dog-product/<dog_product_id>"` should route to a `purchase_dog_product` view
+- `"dog-product/<dog_product_id>"` should route to a `dog_product_detail` view
 - `"dog-product/<dog_product_id>/purchase"` should route to a `purchase_dog_product` view
 - `"purchase/<purchase_id>"` should route to a `purchase_detail` view
 - `"dogtag/new"` should route to a `new_dog_tag` view
@@ -90,16 +90,25 @@ have the following fields:
 This view should render all of the `DogProduct`s using the `home.html`
 template and the context key `dog_products`.
 
+You can run the following line to only test this view:
+
+    python3 manage.py test app.tests.TestHome
+
 ### `dog_product_detail`
 
 This view should render the `DogProduct` identified by the path param using
 the `dog_product_detail.html` template and the context key `dog_product`.
+
+You can run the following line to only test this view:
+
+    python3 manage.py test app.tests.TestDogProductDetail
 
 ### `purchase_dog_product`
 
 This view should attempt to purchase the `DogProduct` identified by path param.
 
 If it is in stock the following should happen:
+
 - `quantity` should be reduced
 - a `Purchase` should be created to mark that the product was purchased at this time
 - a success message (`"Purchased <product name>"`) should be shown to the user
@@ -108,10 +117,18 @@ If it is in stock the following should happen:
 If it is not in stock, an error message (`"<product name> is out of stock"`) should
 be shown to the user and they should be redirected to this dog product's detail page.
 
+You can run the following line to only test this view:
+
+    python3 manage.py test app.tests.TestDogProductPurchase
+
 ### `purchase_detail`
 
 This view should render the `Purchase` identified by the path param using
 the `purchase_detail.html` template and the context key `purchase`.
+
+You can run the following line to only test this view:
+
+    python3 manage.py test app.tests.TestPurchaseDetail
 
 ### `new_dog_tag`
 
@@ -123,3 +140,16 @@ be created with the POSTed data and the user should be redirected to
 the `dog_tag_list` view. If the submission is not valid,
 `new_dog_template.html` should be rendered and the invalid form should
 be provided to the context using the key `form`.
+
+You can run the following line to only test this view:
+
+    python3 manage.py test app.tests.TestNewDogTag
+
+### `dog_tag_list`
+
+This view should render all of the `DogTag`s using the `dog_tag_list.html`
+template and the context key `dog_tags`.
+
+You can run the following line to only test this view:
+
+    python3 manage.py test app.tests.TestDogTagList
