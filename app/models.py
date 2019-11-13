@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class DogProduct(models.Model):
@@ -21,3 +22,13 @@ class DogTag(models.Model):
     owner_name = models.TextField()
     dog_name = models.TextField()
     dog_birthday = models.DateField()
+
+
+class Review(models.Model):
+    id = models.AutoField(primary_key=True)
+    author = models.TextField()
+    product = models.ForeignKey(DogProduct, on_delete=models.CASCADE)
+    content = models.TextField()
+    rating = models.IntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(5)]
+    )

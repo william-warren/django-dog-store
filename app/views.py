@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from app.models import DogProduct, Purchase, DogTag
-from app.forms import NewDogTagForm
+from app.models import DogProduct, Purchase, DogTag, Review
+from app.forms import NewDogTagForm, NewReviewForm
 from django.contrib import messages
 from django.views import View
 from django.utils import timezone
@@ -13,7 +13,12 @@ def home(request):
 
 def dog_product_detail(request, dog_product_id):
     dog_product = DogProduct.objects.get(id=dog_product_id)
-    return render(request, "dog_product_detail.html", {"dog_product": dog_product})
+    reviews = dog_product.review_set.all()
+    return render(
+        request,
+        "dog_product_detail.html",
+        {"dog_product": dog_product, "reviews": reviews},
+    )
 
 
 def purchase_dog_product(request, dog_product_id):
@@ -56,3 +61,14 @@ class NewDogTag(View):
 def dog_tag_list(request):
     dog_tags = DogTag.objects.all()
     return render(request, "dog_tag_list.html", {"dog_tags": dog_tags})
+
+
+def new_review(request, product_id):
+    product = DogProduct.objects.get(id=product_id)
+    review = product.review_set.create(
+        author=request.POST["author"],
+        content=request.POST["content"],
+        rating=request.POST["rating"],
+    )
+    review.save()
+    return redirect("dog_product_detail", product_id)

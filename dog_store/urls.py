@@ -33,4 +33,5 @@ urlpatterns = [
     path("puchase/<purchase_id>", views.purchase_detail, name="purchase_detail"),
     path("dogtag/new", views.NewDogTag.as_view(), name="new_dog_tag"),
     path("dogtag", views.dog_tag_list, name="dog_tag_list"),
+    path("review/new/<product_id>", views.new_review, name="new_review"),
 ]

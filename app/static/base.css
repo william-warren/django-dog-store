@@ -29,3 +29,42 @@
     flex: 1;
     margin-bottom: 2rem;
 }
+
+.review-form {
+    display: flex;
+    border: 1px solid rgba;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px solid rgba(180,180,180,.5);
+    border-radius: 5px;
+}
+
+.review-form > label {
+    margin: .25rem;
+}
+
+.review {
+    display: flex;
+    border: 1px solid rgba(180,180,180,.5);
+    border-radius: 5px;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 1rem;
+    width: fit-content;
+}
+
+.review > p {
+    margin: .25rem;
+}
+
+.review-header {
+    margin-top: 1rem;
+}
+
+.name-input {
+    width: 4.5rem;
+}
+
+.content-input {
+    width: 30rem;
+}

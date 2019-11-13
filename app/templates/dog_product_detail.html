@@ -19,4 +19,45 @@
         </form>
     </div>
 </div>
+<div class="review-container">
+    <h2 class="review-header">
+        Leave a review!
+    </h2>
+    <form action="{% url 'new_review' dog_product.id %}" class="review-form" method="post">
+        {% csrf_token %}
+        <label>Name:<input type="text" name="author" class="name-input"></label>
+        <label>Thoughts:<input type="text" name="content" class="content-input"></label>
+        <label>
+            Rating:
+            <select name="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </label>
+        <button>
+            Submit
+        </button>
+    </form>
+</div>
+<h2 class="review-header">
+    Previous Customers Reviews!
+</h2>
+<div class="reviews">
+    {% for review in reviews %}
+    <div class="review">
+        <p>
+            {{review.author}} ~
+        </p>
+        <p>
+            {{review.content}}
+        </p>
+        <p>
+           || {{review.rating}} Stars
+        </p>
+    </div>
+    {% endfor %}
+</div>
 {% endblock content %}
