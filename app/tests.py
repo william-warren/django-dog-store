@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+from django.utils import timezone
 from django.contrib.messages import get_messages, SUCCESS, ERROR
 from app import models
 
@@ -162,3 +163,76 @@ class TestDogProductPurchase(TestCase):
                 "dog_product_detail", args=[self.out_of_stock_product.id]
             )
             self.assertRedirects(response, dog_product_url)
+
+
+class TestPurchaseDetail(TestCase):
+    def setUp(self):
+        self.dog_product = models.DogProduct.objects.create(
+            id=1,
+            name="big rawhide",
+            product_type="treat",
+            dog_size="big",
+            price=1.55,
+            quantity=18,
+        )
+        self.purchase = self.dog_product.purchase_set.create(
+            id=2, purchased_at=timezone.now()
+        )
+
+    def test_user_can_see_purchase_details(self):
+        purchase_url = reverse("purchase_detail", args=[self.purchase.id])
+        response = self.client.get(purchase_url)
+
+        self.assertContains(response, f"Purchase #{self.purchase.id}")
+        self.assertContains(response, self.purchase.dog_product.name)
+
+
+class TestNewDogTag(TestCase):
+    def test_home_page_has_link_to_new_dog_tag_page(self):
+        response = self.client.get(reverse("home"))
+        self.assertContains(response, reverse("new_dog_tag"))
+
+    def test_user_can_see_labels_and_submit_button(self):
+        response = self.client.get(reverse("new_dog_tag"))
+        self.assertContains(response, "Owner Name")
+        self.assertContains(response, "Dog Name")
+        self.assertContains(response, "Dog Birthday")
+        self.assertContains(response, "Create Dog Tag")
+
+    def test_creating_a_new_dog_tag(self):
+        response = self.client.post(
+            reverse("new_dog_tag"),
+            {"owner_name": "Nate", "dog_name": "Amos", "dog_birthday": "03/20/2019"},
+        )
+
+        with self.subTest("should create a new dog tag"):
+            self.assertEqual(models.DogTag.objects.count(), 1)
+            dog_tag = models.DogTag.objects.first()
+            self.assertEqual(dog_tag.owner_name, "Nate")
+            self.assertEqual(dog_tag.dog_name, "Amos")
+            self.assertEqual(dog_tag.dog_birthday.year, 2019)
+            self.assertEqual(dog_tag.dog_birthday.month, 3)
+            self.assertEqual(dog_tag.dog_birthday.day, 20)
+
+        with self.subTest("should redirect to dog_tag_list"):
+            self.assertRedirects(response, reverse("dog_tag_list"))
+
+
+class TestDogTagList(TestCase):
+    def setUp(self):
+        self.dog_tags = [
+            models.DogTag.objects.create(
+                owner_name="MSU",
+                dog_name=f"Bully #{i+1}",
+                dog_birthday=f"{1980 + i}-01-10",
+            )
+            for i in range(5)
+        ]
+
+    def test_user_can_see_all_tags(self):
+        response = self.client.get(reverse("dog_tag_list"))
+        for dog_tag in self.dog_tags:
+            self.assertContains(response, dog_tag.dog_name)
+            self.assertContains(response, dog_tag.owner_name)
+
+
