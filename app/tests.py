@@ -202,7 +202,7 @@ class TestNewDogTag(TestCase):
     def test_creating_a_new_dog_tag(self):
         response = self.client.post(
             reverse("new_dog_tag"),
-            {"owner_name": "Nate", "dog_name": "Amos", "dog_birthday": "03/20/2019"},
+            {"owner_name": "Nate", "dog_name": "Amos", "dog_birthday": "2019-03-20"},
         )
 
         with self.subTest("should create a new dog tag"):
