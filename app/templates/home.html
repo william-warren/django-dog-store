@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Dog Store</h1>
+<h2>Products</h2>
+<ul>
+{% for product in dog_products %}
+<li class="card">
+    <div class="card-body">
+        <h3 class="card-title">{{ product.name }}</h3>
+        <p>${{ product.price|floatformat:"2" }}</p>
+        <a href="{% url 'dog_product_detail' product.id %}" class="btn btn-primary">
+            View {{ product.name }}
+        </a>
+    </div>
+</li>
+{% endfor %}
+</ul>
+{% endblock content %}
