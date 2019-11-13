@@ -24,6 +24,13 @@
         </li>
     </ul>
 </nav>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{% if message.level_tag == 'error'%}danger{% else %}{{ message.level_tag }}{% endif %}">
+            {{ message.message }}
+        </div>
+    {% endfor %}
+{% endif %}
 <main class="container mt-5">
 {% block content %}
 {% endblock content %}
