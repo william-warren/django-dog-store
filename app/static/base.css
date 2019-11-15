@@ -54,11 +54,11 @@
     justify-content: space-evenly;
     align-items: center;
     margin: 1rem;
-    width: fit-content;
 }
 
 .review > p {
     margin: .25rem;
+    text-align: center;
 }
 
 .reviews {
