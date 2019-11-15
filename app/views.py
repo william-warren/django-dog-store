@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.views import View
 from django.utils import timezone
 
-# Create your views here.
+
 def home(request):
     dog_products = DogProduct.objects.all()
     return render(request, "home.html", {"dog_products": dog_products})
