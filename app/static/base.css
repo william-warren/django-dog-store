@@ -34,14 +34,18 @@
     display: flex;
     border: 1px solid rgba;
     justify-content: space-evenly;
-    align-items: center;
     border: 1px solid rgba(180,180,180,.5);
     border-radius: 5px;
+    flex-direction: column;
+    width: fit-content;
+    padding: .5rem;
+    height: fit-content;
 }
 
 .review-form > label {
     margin: .25rem;
 }
+
 
 .review {
     display: flex;
@@ -57,6 +61,11 @@
     margin: .25rem;
 }
 
+.reviews {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
 /* sorry for not doing more additions to the project */
 /* I've just been in a bad place for a minute */
 
@@ -65,9 +74,26 @@
 }
 /* yee */
 .name-input {
-    width: 4.5rem;
+    width: 11.55rem;
+    align-self: flex-start;
+    padding: 0;
 }
 
 .content-input {
-    width: 30rem;
+    width: 15rem;
+    height: 3.5rem;
+    padding: 0;
+}
+
+textarea {
+    resize: none;
+}
+
+.review-form-button {
+    width: 5rem;
+}
+
+.review-form-bottom-row {
+    align-self: center;
+    margin: .25rem;
 }

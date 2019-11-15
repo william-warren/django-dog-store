@@ -25,21 +25,23 @@
     </h2>
     <form action="{% url 'new_review' dog_product.id %}" class="review-form" method="post">
         {% csrf_token %}
-        <label>Name:<input type="text" name="author" class="name-input"></label>
-        <label>Thoughts:<input type="text" name="content" class="content-input"></label>
-        <label>
-            Rating:
-            <select name="rating">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </label>
-        <button>
-            Submit
-        </button>
+        <label>Name: <input type="text" name="author" class="name-input"></label>
+        <textarea name="content" cols="2" rows="3.5" class="content-input" placeholder=" Thoughts?"></textarea>
+        <div class="review-form-bottom-row">
+            <label>
+                Stars:
+                <select name="rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </label>
+            <button class="btn btn-primary review-form-button">
+                Submit
+            </button>
+        </div>
     </form>
 </div>
 <h2 class="review-header">

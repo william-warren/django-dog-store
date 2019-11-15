@@ -13,7 +13,7 @@ def home(request):
 
 def dog_product_detail(request, dog_product_id):
     dog_product = DogProduct.objects.get(id=dog_product_id)
-    reviews = dog_product.review_set.all()
+    reviews = dog_product.review_set.all().order_by("-rating")
     return render(
         request,
         "dog_product_detail.html",
