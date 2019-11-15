@@ -72,3 +72,16 @@ def new_review(request, product_id):
     )
     review.save()
     return redirect("dog_product_detail", product_id)
+
+
+def ocd_helper(request):
+    products = DogProduct.objects.all()
+    for product in products:
+        words = product.name.split(" ")
+        new_name = ""
+        for word in words:
+            word = word.capitalize()
+            new_name += f"{word} "
+        product.name = new_name
+        product.save()
+    return redirect("home")
