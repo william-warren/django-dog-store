@@ -32,3 +32,9 @@ class Review(models.Model):
     rating = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(5)]
     )
+
+    def stars(self):
+        stars = self.rating
+        result = '⭐' * int(stars)
+        return result
+        
